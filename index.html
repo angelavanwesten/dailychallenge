@@ -65,63 +65,87 @@ const levels = [
  {min:180,max:99999,name:"Legend",icon:"👑"}
 ];
 
-const challenges = [
-["run1","🏃 Hardlopen","2 km rustig hardlopen","Loop 2 km op comfortabel tempo.",2,0,30],
-["run2","🏃 Hardlopen","Run/walk 20 minuten","Wissel 2 min rustig lopen af met 1 min wandelen.",2,0,25],
-["run3","🏃 Hardlopen","3 km steady","Loop 3 km gelijkmatig en gecontroleerd.",3,7,35],
-["run4","🏃 Hardlopen","6 × 30 sec versnellen","Na warming-up: 6 korte versnellingen met rustig herstel.",3,21,45],
-["run5","🏃 Hardlopen","5 km challenge","Loop 5 km op een tempo dat je kunt volhouden.",4,45,60],
-["run6","🏃 Hardlopen","Heuvelblok","10 min rustig + 6 korte heuvelop-versnellingen.",4,75,55],
-["bike1","🚴 Fietsen","10 km fietsen","Fiets 10 km ontspannen tot matig.",2,0,30],
-["bike2","🚴 Fietsen","15 min hoge cadans","Fiets 15 min met lichte weerstand en vlotte trapfrequentie.",2,7,25],
-["bike3","🚴 Fietsen","20 km rit","Maak een rit van 20 km op beheerst tempo.",3,21,50],
-["bike4","🚴 Fietsen","5 × 2 min tempo","Doe 5 blokken van 2 min stevig, met herstel ertussen.",4,45,45],
-["bike5","🚴 Fietsen","30 km avontuur","Kies een mooie route van circa 30 km.",5,75,90],
-["strength1","💪 Kracht","40 squats","4 × 10 lichaamsgewicht-squats, technisch netjes.",2,0,15],
-["strength2","💪 Kracht","30 push-ups","Verdeel 30 herhalingen over sets die goed blijven voelen.",2,0,15],
-["strength3","💪 Kracht","3-ronden circuit","10 squats + 8 push-ups + 20 sec plank, 3 rondes.",3,7,20],
-["strength4","💪 Kracht","60 lunges","30 per been, eventueel verdeeld over sets.",3,21,25],
-["strength5","💪 Kracht","100 reps circuit","Squat, push-up en lunge: samen 100 nette herhalingen.",4,45,30],
-["strength6","💪 Kracht","Core 12 minuten","Wissel plank, dead bug en side plank af.",4,75,20],
-["fit1","🏋️ Fitness","10 min interval","10 rondes: 30 sec bewegen, 30 sec rustig herstel.",2,0,15],
-["fit2","🏋️ Fitness","15 min full body","Maak een rustig circuit met squat, push-up, lunge en plank.",2,7,20],
-["fit3","🏋️ Fitness","20 min circuit","Werk 20 min door met korte pauzes en goede techniek.",3,21,25],
-["fit4","🏋️ Fitness","12 × 40/20","40 sec werk, 20 sec herstel, 12 rondes.",4,45,15],
-["swim1","🏊 Zwemmen","20 banen","Zwem 20 banen rustig tot matig, passend bij je bad.",2,0,30],
-["swim2","🏊 Zwemmen","30 minuten techniek","30 min zwemmen met aandacht voor techniek en rustige ademhaling.",3,7,35],
-["swim3","🏊 Zwemmen","1 km zwemmen","Zwem 1 km verdeeld in haalbare blokken.",4,45,40],
-["football1","⚽ Voetbal","100 balcontacten","Doe 100 gecontroleerde touches met beide voeten.",2,0,15],
-["football2","⚽ Voetbal","20 min dribbelen","Oefen dribbelen met richtingswissels gedurende 20 min.",2,7,25],
-["football3","⚽ Voetbal","50 passes per voet","50 korte passes links en 50 rechts tegen een muur of partner.",3,21,25],
-["football4","⚽ Voetbal","Finishing 30","Doe 30 gerichte schoten of afrondingen met controle.",4,45,30],
-["tennis1","🎾 Tennis","20 min rally","Werk 20 min aan rustige rally's en controle.",2,0,25],
-["tennis2","🎾 Tennis","50 serves","Doe 50 servicepogingen met focus op routine en plaatsing.",3,7,35],
-["tennis3","🎾 Tennis","Footwork 15 min","Oefen split step en korte richtingswissels.",3,21,20],
-["tennis4","🎾 Tennis","100 ballen","Werk aan forehand/backhand: 100 gecontroleerde ballen.",4,45,35],
-["basket1","🏀 Basketbal","50 vrije worpen","Neem 50 vrije worpen en noteer je score.",2,0,25],
-["basket2","🏀 Basketbal","15 min dribbling","Wissel handen, richtingen en tempo af.",2,7,20],
-["basket3","🏀 Basketbal","30 lay-ups","15 per kant, focus op voetenwerk.",3,21,25],
-["basket4","🏀 Basketbal","100 shots","Neem 100 schoten vanuit verschillende posities.",4,45,45],
-["boxing1","🥊 Boksen","4 × 2 min shadowboxing","4 rondes rustig technisch shadowboxen.",2,0,15],
-["boxing2","🥊 Boksen","Footwork 15 min","Oefen voorwaarts, achterwaarts en zijwaarts bewegen.",2,7,20],
-["boxing3","🥊 Boksen","6 × 2 min","6 technische rondes met rustig herstel.",3,21,25],
-["boxing4","🥊 Boksen","Combinaties 100","Werk 100 gecontroleerde stoten af in combinaties.",4,45,25],
-["mob1","🧘 Mobiliteit","10 min sportmobility","Focus op enkels, heupen, bovenrug en schouders.",2,0,12],
-["mob2","🧘 Mobiliteit","15 min herstel","15 min rustige mobiliteit na je sport.",2,7,18],
-["mob3","🧘 Mobiliteit","20 min bewegingsflow","Maak een volledige sportgerichte mobility flow.",3,21,25],
-["walk1","🚶 Wandelen","30 min stevig","Loop 30 min in stevig maar comfortabel tempo.",2,0,35],
-["walk2","🚶 Wandelen","45 min route","Maak een actieve wandeling van 45 min.",2,7,50],
-["walk3","🚶 Wandelen","60 min heuvels","Kies een route met wat hoogteverschil.",3,21,65],
-["ad1","🧗 Avontuur","100 traptreden","Verzamel 100 traptreden verdeeld over sets.",2,0,15],
-["ad2","🧗 Avontuur","20 min touwtje springen","Rustig opbouwen en pauzeren wanneer nodig.",3,21,25],
-["ad3","🧗 Avontuur","Agility 20 min","Zet een simpel parcours uit met richtingswissels.",4,45,25],
-["skill1","🎯 Skills","Balans 10 min","Werk 10 min aan éénbenige balans en sport-specifieke controle.",2,0,12],
-["skill2","🎯 Skills","Reactie 15 min","Train reacties met een bal, muur of partner.",3,21,18],
-["skill3","🎯 Skills","Coördinatie 20 min","Combineer voetenwerk, hand-oogcoördinatie en ritme.",4,45,25],
-["pb1","🎯 Skills","Persoonlijk record","Herhaal een eerdere challenge en probeer je eigen tijd/afstand te verbeteren.",5,75,45],
-["pb2","🎯 Skills","Eigen score +10%","Kies een meetbare sportprestatie en probeer 10% boven je eerdere score te komen.",5,120,50],
-["pb3","🎯 Skills","Legend test","Kies je favoriete sport en zet één duidelijke persoonlijke benchmark.",6,180,60]
+const baseExercises = [
+["Squat","Benen","Doe rustige squats met rechte rug."],
+["Lunge","Benen","Maak gecontroleerde lunges en wissel van been."],
+["Push-up","Bovenlichaam","Doe nette push-ups; maak ze eventueel op knieën."],
+["Plank","Core","Houd je lichaam recht en span je buik aan."],
+["Mountain climber","Cardio","Breng afwisselend je knieën richting je borst."],
+["Jumping jack","Cardio","Spring benen en armen rustig open en dicht."],
+["High knees","Cardio","Til je knieën afwisselend actief op."],
+["Glute bridge","Benen","Duw je heupen rustig omhoog vanuit lig."],
+["Bird dog","Core","Strek afwisselend arm en tegenovergesteld been."],
+["Dead bug","Core","Beweeg tegenovergestelde arm en been gecontroleerd."],
+["Wall sit","Benen","Zak tegen de muur en houd je positie vast."],
+["Calf raise","Benen","Kom rustig op je tenen en zak gecontroleerd terug."],
+["Shoulder taps","Core","Tik vanuit plankpositie afwisselend je schouders aan."],
+["Bear crawl","Coördinatie","Beweeg gecontroleerd voor- en achteruit op handen en voeten."],
+["Shadowboxing","Boksen","Boks rustig in de lucht met gecontroleerde combinaties."],
+["Skater steps","Cardio","Stap of spring gecontroleerd van links naar rechts."],
+["Side plank","Core","Houd je lichaam in één lijn en wissel van zijde."],
+["Reverse lunge","Benen","Stap gecontroleerd naar achteren en kom terug."],
+["Toe touches","Mobiliteit","Beweeg rustig richting je tenen zonder te forceren."],
+["March on spot","Conditie","Loop stevig op de plaats en gebruik je armen."]
 ];
+
+const patterns = [
+ {name:"Basis", sets:[8,10,12], rounds:[2,3], rest:30},
+ {name:"Tempo", sets:[10,12,15], rounds:[2,3,4], rest:20},
+ {name:"Interval", sets:[20,30,40], rounds:[4,6,8], rest:20},
+ {name:"Korte boost", sets:[6,8,10], rounds:[3,4,5], rest:15},
+ {name:"Steady", sets:[12,15,20], rounds:[2,3], rest:30},
+ {name:"Circuit", sets:[8,10,12], rounds:[3,4,5], rest:25}
+];
+
+const modifiers = [
+"Rustig tempo","Gecontroleerd tempo","Met extra focus op techniek",
+"Zo gelijkmatig mogelijk","Met 10 seconden extra rust wanneer nodig",
+"Probeer iedere ronde even sterk te blijven","Focus op een nette uitvoering"
+];
+
+const challenges = [];
+let challengeCounter=1;
+for(const ex of baseExercises){
+  for(const p of patterns){
+    for(const qty of p.sets){
+      for(const rounds of p.rounds){
+        for(const mod of modifiers){
+          const mins=Math.max(3,Math.round((qty*rounds*0.35 + p.rest*(rounds-1)/60)));
+          let unlock=0;
+          if(mins>=7) unlock=7;
+          if(mins>=10) unlock=21;
+          if(mins>=15) unlock=45;
+          if(mins>=20) unlock=75;
+          const id="gen"+challengeCounter++;
+          const title=`${rounds} rondes ${qty} ${ex[0].toLowerCase()}`;
+          const desc=`Doe ${rounds} rondes van ${qty} herhalingen. Rust ${p.rest} sec tussen de rondes. ${mod}. ${ex[2]}`;
+          challenges.push([id, ex[1], title, desc, mins, unlock, Math.max(2,Math.min(6,Math.ceil(mins/4)))]);
+        }
+      }
+    }
+  }
+}
+
+const timeChallenges=[
+["5 minuten beweging","Doe 5 minuten rustig bewegen op de plaats. Wissel wandelen, knieheffen en armbewegingen af.",0,2],
+["8 minuten conditie","30 sec stevig bewegen + 30 sec rustig bewegen. Herhaal 8 keer.",0,3],
+["10 minuten full body","Wissel squats, push-ups, lunges en plank af in een rustig circuit.",7,3],
+["12 minuten cardio","40 sec jumping jacks of marcheren + 20 sec rust. Herhaal 12 keer.",21,4],
+["15 minuten thuiscircuit","Kies vier eenvoudige oefeningen en werk 15 minuten gecontroleerd door.",45,5],
+["20 minuten sportblok","Maak een afwisselend blok van benen, core en conditie en houd 20 minuten vol.",75,5],
+["25 minuten eigen challenge","Kies drie favoriete oefeningen en maak er een gecontroleerde challenge van.",120,6],
+["30 minuten sportmix","Wissel iedere 5 minuten tussen kracht, cardio en core.",180,6]
+];
+timeChallenges.forEach((x,i)=>challenges.push(["mix"+i,"🏠 Thuis mix",x[0],x[1],x[0].match(/\d+/)?.[0]||10,x[2],x[3]]));
+
+function available(){
+ let arr=challenges.filter(c=>c[5]<=state.streak && (state.prefs.length===0 || state.prefs.includes(c[1]) || c[1]==="🏠 Thuis mix"));
+ if(!arr.length) arr=challenges.filter(c=>c[5]<=state.streak);
+ const recent=state.history.slice(-14).map(x=>x.id);
+ const fresh=arr.filter(c=>!recent.includes(c[0]));
+ return fresh.length?fresh:arr;
+}
+
 
 const key="dailyChallengeV2";
 let state=JSON.parse(localStorage.getItem(key)||"null")||{
@@ -163,8 +187,8 @@ function nav(){
 function renderToday(){
  const c=daily(), l=level(), n=nextLevel(), done=state.completedDates.includes(localDate()), pr=streakProgress();
  document.getElementById("today").innerHTML=`
- <section class="card hero"><div class="eyebrow">${dateNL()}</div><h1>${l.icon} ${l.name}</h1><p class="muted">Streak: <b>${state.streak} dagen</b> · ${state.points} punten</p></section>
- <section class="card"><span class="pill">${c[1]}</span><span class="pill">${c[6]} punten</span><div class="challenge-title">${c[2]}</div><p class="muted">${c[3]}</p><p><b>Richttijd:</b> ${c[6]} min · <b>Level:</b> ${levels.find(x=>x.min===c[5]).name}</p>
+ <section class="card hero"><div class="eyebrow">${dateNL()}</div><h1>${l.icon} ${l.name}</h1><p class="muted">Streak: <b>${state.streak} dagen</b> · ${state.points} punten · ${challenges.length.toLocaleString("nl-NL")} challenges</p></section>
+ <section class="card"><span class="pill">${c[1]}</span><span class="pill">${c[6]} punten</span><div class="challenge-title">${c[2]}</div><p class="muted">${c[3]}</p><p><b>Richttijd:</b> ${c[4]} min · <b>Level:</b> ${levels.find(x=>c[5]>=x.min&&c[5]<=x.max)?.name||"Rookie"}</p>
  <button class="primary" ${done?"disabled":""} onclick="complete()">${done?"✓ Challenge voltooid":"Ik heb hem gedaan ✓"}</button></section>
  <section class="card"><div class="row"><b>Naar ${n?n.name:"Legend"}</b><span>${pr.text}</span></div><div class="progress" style="margin-top:10px"><i style="width:${pr.pct}%"></i></div></section>
  <section class="grid"><div class="stat"><b>${state.total}</b><span>voltooid</span></div><div class="stat"><b>${state.longest}</b><span>langste streak</span></div></section>
@@ -188,7 +212,7 @@ function renderLevels(){
  levels.map(l=>`<section class="card"><div class="level"><div class="levelIcon">${l.icon}</div><div><h3 style="margin:0">${l.name}</h3><div class="small muted">${l.min===0?"Start":l.min+" dagen streak"}${l.max<99999?" – "+l.max+" dagen": " +"}</div></div></div><p class="small" style="margin:12px 0 0">${challenges.filter(c=>c[5]>=l.min&&c[5]<=l.max).slice(0,3).map(c=>c[2]).join(" · ")||"Nieuwe challenges worden hier beschikbaar."}</p></section>`).join("");
 }
 function renderProfile(){
- document.getElementById("profile").innerHTML=`<section class="card"><h2>👤 Profiel</h2><p class="muted">Kies de sporten die je graag terugziet. Je kunt altijd alles selecteren.</p><div id="sports">${sports.map(s=>`<button class="sport ${state.prefs.includes(s)?"selected":""}" onclick="toggleSport('${s.replaceAll("'","\\'")}')">${s}</button>`).join("")}</div><button class="secondary" style="margin-top:14px" onclick="selectAll()">Alle sporten</button></section>
+ document.getElementById("profile").innerHTML=`<section class="card"><h2>👤 Profiel</h2><p><b>${challenges.length.toLocaleString("nl-NL")}</b> thuis-challenges beschikbaar.</p><p class="muted">Kies de sporten die je graag terugziet. Je kunt altijd alles selecteren.</p><div id="sports">${sports.map(s=>`<button class="sport ${state.prefs.includes(s)?"selected":""}" onclick="toggleSport('${s.replaceAll("'","\\'")}')">${s}</button>`).join("")}</div><button class="secondary" style="margin-top:14px" onclick="selectAll()">Alle sporten</button></section>
  <section class="card"><h3>Statistieken</h3><p>🏆 ${state.total} challenges voltooid</p><p>🔥 ${state.longest} dagen langste streak</p><p>⭐ ${state.points} punten</p></section>
  <section class="card"><h3>Reset</h3><p class="small muted">Hiermee verwijder je alle lokale voortgang op dit apparaat.</p><button class="danger" onclick="resetAll()">Reset voortgang</button></section>`;
 }
