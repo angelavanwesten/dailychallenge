@@ -6,221 +6,273 @@
 <meta name="theme-color" content="#101827">
 <title>Daily Challenge</title>
 <style>
-:root{--bg:#f4f6f8;--card:#fff;--text:#101827;--muted:#667085;--line:#e5e7eb;--accent:#16a34a;--accent2:#0f766e;--dark:#101827;--danger:#dc2626}
+:root{--bg:#f4f6f8;--card:#fff;--text:#101827;--muted:#667085;--line:#e5e7eb;--accent:#16a34a;--dark:#101827}
 *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text)}
 .app{max-width:620px;margin:auto;min-height:100vh;padding-bottom:88px}.top{padding:24px 18px 8px}.brand{font-weight:900;font-size:27px}.sub{color:var(--muted);margin-top:3px}
-.page{display:none;padding:12px 16px}.page.active{display:block}
-.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;margin:10px 0;box-shadow:0 4px 18px #1018270a}
-.hero{background:linear-gradient(135deg,#101827,#193c32);color:#fff;border:0;padding:22px}
-.eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:12px;font-weight:800;opacity:.72}
-h1,h2,h3,p{margin-top:0}h1{font-size:29px;line-height:1.05;margin:8px 0}h2{font-size:21px;margin-bottom:8px}h3{margin-bottom:5px}
-.muted{color:var(--muted)}.hero .muted{color:#cbd5d1}
+.page{display:none;padding:12px 16px}.page.active{display:block}.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;margin:10px 0;box-shadow:0 4px 18px #1018270a}
+.hero{background:linear-gradient(135deg,#101827,#193c32);color:#fff;border:0;padding:22px}.eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:12px;font-weight:800;opacity:.72}
+h1,h2,h3,p{margin-top:0}h1{font-size:29px;line-height:1.05;margin:8px 0}h2{font-size:21px;margin-bottom:8px}h3{margin-bottom:5px}.muted{color:var(--muted)}.hero .muted{color:#cbd5d1}
 .grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{padding:14px;border-radius:16px;background:#f8fafc}.stat b{display:block;font-size:24px}.stat span{font-size:12px;color:var(--muted)}
-button{border:0;border-radius:14px;padding:13px 15px;font-weight:800;font-size:14px;cursor:pointer}
-.primary{background:var(--accent);color:#fff;width:100%;margin-top:12px}.secondary{background:#eef2f0;color:var(--text)}.danger{background:#fee2e2;color:#991b1b}
-.pill{display:inline-flex;padding:6px 10px;border-radius:999px;background:#e9f7ef;color:#166534;font-weight:800;font-size:12px;margin:2px 3px 2px 0}
-.challenge-title{font-size:26px;font-weight:900;margin:7px 0}.big{font-size:48px;font-weight:950;line-height:1}
+button{border:0;border-radius:14px;padding:13px 15px;font-weight:800;font-size:14px;cursor:pointer}.primary{background:var(--accent);color:#fff;width:100%;margin-top:12px}.secondary{background:#eef2f0;color:var(--text)}.danger{background:#fee2e2;color:#991b1b}
+.pill{display:inline-flex;padding:6px 10px;border-radius:999px;background:#e9f7ef;color:#166534;font-weight:800;font-size:12px;margin:2px 3px 2px 0}.challenge-title{font-size:25px;font-weight:900;margin:8px 0}
 .progress{height:9px;background:#e5e7eb;border-radius:99px;overflow:hidden}.progress>i{display:block;height:100%;background:var(--accent);border-radius:99px}
-.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.list{display:grid;gap:9px}.item{padding:14px;border:1px solid var(--line);border-radius:17px;background:#fff}.item.locked{opacity:.52}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.list{display:grid;gap:9px}.item{padding:14px;border:1px solid var(--line);border-radius:17px;background:#fff}
 .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(620px,100%);background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:7px 7px calc(7px + env(safe-area-inset-bottom));z-index:5}.nav button{background:transparent;color:#667085;padding:8px 3px;font-size:11px}.nav button.active{color:#0f766e}.nav span{display:block;font-size:19px;margin-bottom:2px}
-.check{font-size:13px;color:#166534;font-weight:800}.section{margin-top:18px}.sport{display:inline-block;margin:4px 4px 0 0;padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:#fff}.sport.selected{background:#dcfce7;border-color:#86efac;color:#166534}
-.small{font-size:12px}.level{display:flex;gap:12px;align-items:center}.levelIcon{width:46px;height:46px;border-radius:15px;background:#eef2f0;display:grid;place-items:center;font-size:23px}
+.sport{display:inline-block;margin:4px 4px 0 0;padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:#fff}.sport.selected{background:#dcfce7;border-color:#86efac;color:#166534}.small{font-size:12px}
 .calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.day{height:34px;border-radius:9px;background:#f1f5f9;display:grid;place-items:center;font-size:11px}.day.done{background:#bbf7d0;color:#166534;font-weight:900}.day.today{outline:2px solid #16a34a}
-.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;justify-content:center;z-index:20}.modal.show{display:flex}.sheet{width:min(620px,100%);background:#fff;border-radius:24px 24px 0 0;padding:20px;max-height:88vh;overflow:auto}
-label{font-weight:800;font-size:13px;display:block;margin:12px 0 6px}input{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;font:inherit}
 .notice{padding:12px;border-radius:14px;background:#fff7ed;color:#9a3412;font-size:12px}
 </style>
 </head>
 <body>
 <div class="app">
-  <header class="top"><div class="brand">⚡ Daily Challenge</div><div class="sub">Elke dag één sportieve challenge.</div></header>
-
-  <main id="today" class="page active"></main>
-  <main id="challenges" class="page"></main>
-  <main id="progress" class="page"></main>
-  <main id="levels" class="page"></main>
-  <main id="profile" class="page"></main>
-
-  <nav class="nav">
-    <button data-page="today" class="active"><span>🏠</span>Vandaag</button>
-    <button data-page="challenges"><span>🏆</span>Challenges</button>
-    <button data-page="progress"><span>📈</span>Progress</button>
-    <button data-page="levels"><span>🔓</span>Levels</button>
-    <button data-page="profile"><span>👤</span>Profiel</button>
-  </nav>
+<header class="top"><div class="brand">⚡ Daily Challenge</div><div class="sub">Elke dag één sportieve challenge.</div></header>
+<main id="today" class="page active"></main>
+<main id="challenges" class="page"></main>
+<main id="progress" class="page"></main>
+<main id="levels" class="page"></main>
+<main id="profile" class="page"></main>
+<nav class="nav">
+<button data-page="today" class="active"><span>🏠</span>Vandaag</button>
+<button data-page="challenges"><span>🏆</span>Challenges</button>
+<button data-page="progress"><span>📈</span>Progress</button>
+<button data-page="levels"><span>🔓</span>Levels</button>
+<button data-page="profile"><span>👤</span>Profiel</button>
+</nav>
 </div>
 
-<div id="modal" class="modal"><div class="sheet" id="sheet"></div></div>
-
 <script>
-const sports = ["🏃 Hardlopen","🚴 Fietsen","💪 Kracht","🏋️ Fitness","🏊 Zwemmen","⚽ Voetbal","🎾 Tennis","🏀 Basketbal","🥊 Boksen","🧘 Mobiliteit","🚶 Wandelen","🧗 Avontuur","🎯 Skills"];
+const sports=["🫀 Conditie","💪 Kracht","🔥 HIIT","🥊 Boksen","🤸 Mobiliteit","🎯 Coördinatie","🏠 Full body","🧠 Skills"];
 
-const levels = [
- {min:0,max:6,name:"Rookie",icon:"🌱"},
- {min:7,max:20,name:"Starter",icon:"🚀"},
- {min:21,max:44,name:"Athlete",icon:"💪"},
- {min:45,max:74,name:"Advanced",icon:"🔥"},
- {min:75,max:119,name:"Pro",icon:"⚡"},
- {min:120,max:179,name:"Elite",icon:"🏆"},
- {min:180,max:99999,name:"Legend",icon:"👑"}
+const levels=[
+{min:0,max:6,name:"Rookie",icon:"🌱"},
+{min:7,max:20,name:"Starter",icon:"🚀"},
+{min:21,max:44,name:"Athlete",icon:"💪"},
+{min:45,max:74,name:"Advanced",icon:"🔥"},
+{min:75,max:119,name:"Pro",icon:"⚡"},
+{min:120,max:179,name:"Elite",icon:"🏆"},
+{min:180,max:99999,name:"Legend",icon:"👑"}
 ];
 
-const baseExercises = [
-["Squat","Benen","Doe rustige squats met rechte rug."],
-["Lunge","Benen","Maak gecontroleerde lunges en wissel van been."],
-["Push-up","Bovenlichaam","Doe nette push-ups; maak ze eventueel op knieën."],
-["Plank","Core","Houd je lichaam recht en span je buik aan."],
-["Mountain climber","Cardio","Breng afwisselend je knieën richting je borst."],
-["Jumping jack","Cardio","Spring benen en armen rustig open en dicht."],
-["High knees","Cardio","Til je knieën afwisselend actief op."],
-["Glute bridge","Benen","Duw je heupen rustig omhoog vanuit lig."],
-["Bird dog","Core","Strek afwisselend arm en tegenovergesteld been."],
-["Dead bug","Core","Beweeg tegenovergestelde arm en been gecontroleerd."],
-["Wall sit","Benen","Zak tegen de muur en houd je positie vast."],
-["Calf raise","Benen","Kom rustig op je tenen en zak gecontroleerd terug."],
-["Shoulder taps","Core","Tik vanuit plankpositie afwisselend je schouders aan."],
-["Bear crawl","Coördinatie","Beweeg gecontroleerd voor- en achteruit op handen en voeten."],
-["Shadowboxing","Boksen","Boks rustig in de lucht met gecontroleerde combinaties."],
-["Skater steps","Cardio","Stap of spring gecontroleerd van links naar rechts."],
-["Side plank","Core","Houd je lichaam in één lijn en wissel van zijde."],
-["Reverse lunge","Benen","Stap gecontroleerd naar achteren en kom terug."],
-["Toe touches","Mobiliteit","Beweeg rustig richting je tenen zonder te forceren."],
-["March on spot","Conditie","Loop stevig op de plaats en gebruik je armen."]
+const pools={
+"🫀 Conditie":[
+["Joggen op de plaats","Jog rustig op de plaats en beweeg je armen mee."],
+["High knees","Til je knieën afwisselend actief op."],
+["Jumping jacks","Spring je voeten rustig uit elkaar en weer samen."],
+["Mountain climbers","Breng je knieën afwisselend richting je borst."],
+["Skater steps","Stap of spring gecontroleerd van links naar rechts."],
+["Marcheren","Loop stevig op de plaats en gebruik je armen."],
+["Step touch","Stap links en rechts en beweeg je armen mee."],
+["Knieheffen + punches","Til je knieën op en maak rustige stoten in de lucht."],
+["Fast feet","Maak korte, snelle stapjes op de plaats."],
+["Lateral steps","Beweeg gecontroleerd twee stappen links en twee rechts."]
+],
+"💪 Kracht":[
+["Push-ups","Doe nette push-ups; maak ze eventueel op knieën."],
+["Wall sit","Zak tegen een muur en houd je positie vast."],
+["Glute bridge","Duw je heupen rustig omhoog vanuit lig."],
+["Calf raises","Kom rustig op je tenen en zak gecontroleerd terug."],
+["Plank","Houd je lichaam recht en span je buik aan."],
+["Side plank","Houd je lichaam in één lijn en wissel van zijde."],
+["Bird dog","Strek afwisselend arm en tegenovergesteld been."],
+["Dead bug","Beweeg tegenovergestelde arm en been gecontroleerd."],
+["Triceps dips","Gebruik alleen een stevige, stabiele stoel en beweeg rustig."],
+["Superman","Til armen en benen licht op vanuit buikligging; houd het gecontroleerd."]
+],
+"🔥 HIIT":[
+["Jumping jack + plank","Wissel jumping jacks af met een korte plank."],
+["High knees + push-up","Combineer knieheffen met rustige push-ups."],
+["Mountain climber + marcheren","Wissel actief klimmen af met herstel op de plaats."],
+["Skater + plank","Wissel zijwaartse beweging af met core."],
+["Fast feet + squat","Wissel snelle voeten af met gecontroleerde squats."],
+["Step touch + punches","Combineer zijwaartse stappen met punches."]
+],
+"🥊 Boksen":[
+["Shadowboxing","Boks rustig in de lucht met gecontroleerde combinaties."],
+["Jab-cross","Wissel een rechte linker- en rechterstoot af."],
+["Footwork","Beweeg voor-, achter- en zijwaarts zonder je balans te verliezen."],
+["Hook-combinaties","Oefen rustige hooks links en rechts."],
+["Defence drill","Combineer stappen met lichte slips en ducking."],
+["Jab + footwork","Maak een jab en beweeg direct een stap opzij."]
+],
+"🤸 Mobiliteit":[
+["Heupmobiliteit","Maak rustige heupcirkels en gecontroleerde beenbewegingen."],
+["Schoudermobiliteit","Maak rustige armcirkels en schouderbewegingen."],
+["Enkelmobiliteit","Beweeg je enkels rustig door hun comfortabele bereik."],
+["Bovenrug rotaties","Draai rustig vanuit je bovenrug zonder te forceren."],
+["Dynamische stretch","Wissel rustige been-, heup- en armbewegingen af."],
+["World's easiest flow","Beweeg rustig door een combinatie van heup-, schouder- en rugbewegingen."]
+],
+"🎯 Coördinatie":[
+["Balans links/rechts","Sta afwisselend op één been en gebruik je armen voor balans."],
+["Cross-crawl","Raak met je rechterhand je linkerknie en andersom."],
+["Vierkant voetenwerk","Maak een klein vierkant met vier verschillende staprichtingen."],
+["Reactie op richtingen","Noem links, rechts, voor of achter en reageer met een stap."],
+["Ritme challenge","Wissel een snel en langzaam bewegingspatroon af."],
+["Knie + elleboog","Breng afwisselend knie en tegenovergestelde elleboog samen."]
+],
+"🏠 Full body":[
+["Squat + push-up","Wissel een squat af met een push-up."],
+["Lunge + punch","Doe een gecontroleerde lunge en sluit af met twee punches."],
+["Mountain climber + plank","Wissel mountain climbers af met een plank."],
+["Jumping jack + squat","Combineer cardio met gecontroleerde kracht."],
+["Glute bridge + dead bug","Wissel beide oefeningen rustig af."],
+["High knees + push-up","Combineer conditie met bovenlichaam."],
+["Step touch + wall sit","Wissel bewegen af met een korte wall sit."],
+["Bear crawl + plank","Beweeg kort voor/achter en sluit af met plank."]
+],
+"🧠 Skills":[
+["10 minuten voetenwerk","Maak een simpel patroon van voor, achter, links en rechts."],
+["Reactie challenge","Geef jezelf willekeurige richtingen en reageer direct met een stap."],
+["Balans challenge","Wissel 20 seconden links en rechts af met korte rust."],
+["Ritme challenge","Maak drie bewegingspatronen en herhaal ze in verschillende tempo's."],
+["Coördinatie flow","Combineer knieheffen, zijstappen en armbewegingen in één patroon."]
+]
+};
+
+const formats=[
+["Express",2,25,15],["Circuit",3,30,20],["Steady",3,40,20],
+["Builder",4,30,20],["Endurance",4,40,20],["Challenge",5,35,20],
+["Mix",3,45,25],["Longer",5,45,20]
+];
+const modifiers=[
+"Blijf technisch netjes bewegen.","Houd alle rondes ongeveer even sterk.",
+"Begin rustig en bouw iets op.","Focus op een vloeiende uitvoering.",
+"Neem extra rust als dat nodig is.","Probeer zo weinig mogelijk stil te staan.",
+"Voer alles gecontroleerd uit.","Maak de laatste ronde niet sneller dan je aankunt."
 ];
 
-const patterns = [
- {name:"Basis", sets:[8,10,12], rounds:[2,3], rest:30},
- {name:"Tempo", sets:[10,12,15], rounds:[2,3,4], rest:20},
- {name:"Interval", sets:[20,30,40], rounds:[4,6,8], rest:20},
- {name:"Korte boost", sets:[6,8,10], rounds:[3,4,5], rest:15},
- {name:"Steady", sets:[12,15,20], rounds:[2,3], rest:30},
- {name:"Circuit", sets:[8,10,12], rounds:[3,4,5], rest:25}
-];
-
-const modifiers = [
-"Rustig tempo","Gecontroleerd tempo","Met extra focus op techniek",
-"Zo gelijkmatig mogelijk","Met 10 seconden extra rust wanneer nodig",
-"Probeer iedere ronde even sterk te blijven","Focus op een nette uitvoering"
-];
-
-const challenges = [];
-let challengeCounter=1;
-for(const ex of baseExercises){
-  for(const p of patterns){
-    for(const qty of p.sets){
-      for(const rounds of p.rounds){
-        for(const mod of modifiers){
-          const mins=Math.max(3,Math.round((qty*rounds*0.35 + p.rest*(rounds-1)/60)));
-          let unlock=0;
-          if(mins>=7) unlock=7;
-          if(mins>=10) unlock=21;
-          if(mins>=15) unlock=45;
-          if(mins>=20) unlock=75;
-          const id="gen"+challengeCounter++;
-          const title=`${rounds} rondes ${qty} ${ex[0].toLowerCase()}`;
-          const desc=`Doe ${rounds} rondes van ${qty} herhalingen. Rust ${p.rest} sec tussen de rondes. ${mod}. ${ex[2]}`;
-          challenges.push([id, ex[1], title, desc, mins, unlock, Math.max(2,Math.min(6,Math.ceil(mins/4)))]);
-        }
-      }
+const challenges=[];
+let id=1;
+for(const [cat,items] of Object.entries(pools)){
+ for(let a=0;a<items.length;a++){
+  for(let b=0;b<items.length;b++){
+   if(a===b && items.length>1) continue;
+   for(let f=0;f<formats.length;f++){
+    const [format,rounds,work,rest]=formats[f];
+    for(let m=0;m<modifiers.length;m++){
+     const one=items[a],two=items[b];
+     const title=a===b?`${format}: ${one[0]}`:`${format}: ${one[0]} + ${two[0]}`;
+     const desc=a===b
+       ?`${rounds} rondes: ${work} sec ${one[0].toLowerCase()}, ${rest} sec rust. ${one[1]} ${modifiers[m]}`
+       :`${rounds} rondes: ${work} sec ${one[0].toLowerCase()}, ${work} sec ${two[0].toLowerCase()}, daarna ${rest} sec rust. ${one[1]} ${two[1]} ${modifiers[m]}`;
+     const mins=Math.max(3,Math.ceil(rounds*(work*(a===b?1:2)+rest)/60));
+     let unlock=mins>=25?120:mins>=20?75:mins>=16?45:mins>=12?21:mins>=8?7:0;
+     challenges.push(["c"+id++,cat,title,desc,mins,unlock,Math.min(6,2+Math.floor(mins/7))]);
     }
+   }
   }
+ }
 }
 
-const timeChallenges=[
-["5 minuten beweging","Doe 5 minuten rustig bewegen op de plaats. Wissel wandelen, knieheffen en armbewegingen af.",0,2],
-["8 minuten conditie","30 sec stevig bewegen + 30 sec rustig bewegen. Herhaal 8 keer.",0,3],
-["10 minuten full body","Wissel squats, push-ups, lunges en plank af in een rustig circuit.",7,3],
-["12 minuten cardio","40 sec jumping jacks of marcheren + 20 sec rust. Herhaal 12 keer.",21,4],
-["15 minuten thuiscircuit","Kies vier eenvoudige oefeningen en werk 15 minuten gecontroleerd door.",45,5],
-["20 minuten sportblok","Maak een afwisselend blok van benen, core en conditie en houd 20 minuten vol.",75,5],
-["25 minuten eigen challenge","Kies drie favoriete oefeningen en maak er een gecontroleerde challenge van.",120,6],
-["30 minuten sportmix","Wissel iedere 5 minuten tussen kracht, cardio en core.",180,6]
+const special=[
+["🫀 Conditie","5 minuten zonder stil te staan","Beweeg 5 minuten aaneengesloten. Wissel marcheren, joggen en zijwaarts stappen af.",0,2,5],
+["🫀 Conditie","10 minuten interval","40 sec actief bewegen + 20 sec rustig bewegen, 10 minuten lang.",7,3,10],
+["🔥 HIIT","12 minuten mix","Wissel iedere minuut tussen cardio, benen en core.",21,4,12],
+["🏠 Full body","15 minuten thuis","5 min cardio, 5 min kracht en 5 min core.",45,5,15],
+["🏠 Full body","20 minuten sportmix","Wissel iedere 2 minuten tussen conditie, bovenlichaam, benen en core.",75,5,20],
+["🥊 Boksen","6 rondes shadowboxing","6 rondes van 2 minuten: combinaties, footwork en verdediging afwisselen.",21,5,12],
+["🤸 Mobiliteit","12 minuten sportmobility","Werk rustig aan enkels, heupen, bovenrug en schouders.",0,2,12],
+["🧠 Skills","10 minuten voetenwerk","Maak een eenvoudig patroon met voor-, achter- en zijwaartse stappen.",0,2,10]
 ];
-timeChallenges.forEach((x,i)=>challenges.push(["mix"+i,"🏠 Thuis mix",x[0],x[1],x[0].match(/\d+/)?.[0]||10,x[2],x[3]]));
+special.forEach((x,i)=>challenges.push(["s"+i,x[0],x[1],x[2],x[5],x[3],x[4]]));
 
-function available(){
- let arr=challenges.filter(c=>c[5]<=state.streak && (state.prefs.length===0 || state.prefs.includes(c[1]) || c[1]==="🏠 Thuis mix"));
- if(!arr.length) arr=challenges.filter(c=>c[5]<=state.streak);
- const recent=state.history.slice(-14).map(x=>x.id);
- const fresh=arr.filter(c=>!recent.includes(c[0]));
- return fresh.length?fresh:arr;
-}
-
-
-const key="dailyChallengeV2";
+const key="dailyChallengeV5";
 let state=JSON.parse(localStorage.getItem(key)||"null")||{
- streak:0,longest:0,total:0,points:0,completedDates:[],history:[],prefs:[...sports],lastChallenge:null
+streak:0,longest:0,total:0,points:0,completedDates:[],history:[],prefs:[...sports],lastChallenge:null
 };
 function save(){localStorage.setItem(key,JSON.stringify(state))}
 function localDate(d=new Date()){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
 function dateNL(){return new Intl.DateTimeFormat("nl-NL",{weekday:"long",day:"numeric",month:"long"}).format(new Date())}
 function level(){return levels.find(l=>state.streak>=l.min&&state.streak<=l.max)||levels.at(-1)}
 function nextLevel(){return levels.find(l=>l.min>state.streak)}
-function available(){let arr=challenges.filter(c=>c[5]<=state.streak && (state.prefs.length===0||state.prefs.includes(c[1]))); if(!arr.length)arr=challenges.filter(c=>c[5]<=state.streak); return arr}
+function available(){
+ let arr=challenges.filter(c=>c[5]<=state.streak);
+ if(state.prefs.length && state.prefs.length<sports.length){
+  const filtered=arr.filter(c=>state.prefs.includes(c[1]));
+  if(filtered.length>30) arr=filtered;
+ }
+ const recent=state.history.slice(-10);
+ const recentIds=new Set(recent.map(x=>x.id));
+ const recentCats=new Set(recent.slice(-4).map(x=>x.category).filter(Boolean));
+ let fresh=arr.filter(c=>!recentIds.has(c[0])&&!recentCats.has(c[1]));
+ if(fresh.length<20) fresh=arr.filter(c=>!recentIds.has(c[0])&&c[0]!==state.lastChallenge);
+ if(!fresh.length) fresh=arr.filter(c=>c[0]!==state.lastChallenge);
+ return fresh.length?fresh:arr;
+}
 function daily(){
  const today=localDate();
  const same=state.history.find(x=>x.date===today);
  if(same)return challenges.find(c=>c[0]===same.id)||available()[0];
- const arr=available().filter(c=>c[0]!==state.lastChallenge);
- return arr[Math.floor(Math.random()*arr.length)]||available()[0];
-}
-function streakProgress(){
- const n=nextLevel(); if(!n)return {text:"Max level bereikt",pct:100};
- const pct=Math.round(((state.streak-n.min+1)/(n.min-(level().min)+1))*100);
- return {text:`${state.streak}/${n.min} dagen`,pct:Math.max(0,Math.min(100,pct))};
+ const arr=available();
+ return arr[Math.floor(Math.random()*arr.length)]||challenges[0];
 }
 function complete(){
- const c=daily(), today=localDate();
- if(state.completedDates.includes(today)) return;
- const yesterday=new Date(); yesterday.setDate(yesterday.getDate()-1);
- const yd=localDate(yesterday);
- state.streak=state.completedDates.includes(yd)?state.streak+1:1;
+ const c=daily(),today=localDate();
+ if(state.completedDates.includes(today))return;
+ const y=new Date();y.setDate(y.getDate()-1);
+ state.streak=state.completedDates.includes(localDate(y))?state.streak+1:1;
  state.longest=Math.max(state.longest,state.streak);
- state.total++; state.points+=c[6];
- state.completedDates.push(today);
- state.history.push({date:today,id:c[0],title:c[2],points:c[6]});
- state.lastChallenge=c[0]; save(); render();
+ state.total++;state.points+=c[6];state.completedDates.push(today);
+ state.history.push({date:today,id:c[0],title:c[2],category:c[1],points:c[6]});
+ state.lastChallenge=c[0];save();render();
 }
-function nav(){
- document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.getElementById(b.dataset.page).classList.add("active");render()})
+function streakProgress(){
+ const n=nextLevel();
+ if(!n)return{text:"Max level bereikt",pct:100};
+ const span=n.min-level().min;
+ return{text:`${state.streak}/${n.min} dagen`,pct:Math.max(0,Math.min(100,Math.round((state.streak-level().min+1)/span*100)))};
 }
 function renderToday(){
- const c=daily(), l=level(), n=nextLevel(), done=state.completedDates.includes(localDate()), pr=streakProgress();
+ const c=daily(),l=level(),n=nextLevel(),done=state.completedDates.includes(localDate()),pr=streakProgress();
  document.getElementById("today").innerHTML=`
- <section class="card hero"><div class="eyebrow">${dateNL()}</div><h1>${l.icon} ${l.name}</h1><p class="muted">Streak: <b>${state.streak} dagen</b> · ${state.points} punten · ${challenges.length.toLocaleString("nl-NL")} challenges</p></section>
- <section class="card"><span class="pill">${c[1]}</span><span class="pill">${c[6]} punten</span><div class="challenge-title">${c[2]}</div><p class="muted">${c[3]}</p><p><b>Richttijd:</b> ${c[4]} min · <b>Level:</b> ${levels.find(x=>c[5]>=x.min&&c[5]<=x.max)?.name||"Rookie"}</p>
+ <section class="card hero"><div class="eyebrow">${dateNL()}</div><h1>${l.icon} ${l.name}</h1><p class="muted">Streak: <b>${state.streak} dagen</b> · ${state.points} punten</p></section>
+ <section class="card"><span class="pill">${c[1]}</span><span class="pill">${c[4]} min</span><span class="pill">${c[6]} punten</span>
+ <div class="challenge-title">${c[2]}</div><p class="muted">${c[3]}</p>
+ <p><b>Thuis</b> · Geen speciale apparatuur nodig</p>
  <button class="primary" ${done?"disabled":""} onclick="complete()">${done?"✓ Challenge voltooid":"Ik heb hem gedaan ✓"}</button></section>
  <section class="card"><div class="row"><b>Naar ${n?n.name:"Legend"}</b><span>${pr.text}</span></div><div class="progress" style="margin-top:10px"><i style="width:${pr.pct}%"></i></div></section>
  <section class="grid"><div class="stat"><b>${state.total}</b><span>voltooid</span></div><div class="stat"><b>${state.longest}</b><span>langste streak</span></div></section>
- <div class="notice">Sport slim: warm rustig op, pas de challenge aan je niveau aan en stop bij pijn, duizeligheid of andere klachten.</div>`;
+ <div class="notice">Kies een passend tempo, warm rustig op en pas een oefening aan als dat nodig is. Stop bij pijn of duizeligheid.</div>`;
 }
 function renderChallenges(){
- const el=document.getElementById("challenges");
- const groups={}; challenges.forEach(c=>(groups[c[1]]??=[]).push(c));
- el.innerHTML=`<section class="card"><h2>🏆 Challenges</h2><p class="muted">Je level bepaalt welke challenges beschikbaar zijn. Zo groeit de moeilijkheid mee met je streak.</p></section>`+
- Object.entries(groups).map(([sport,arr])=>`<section class="section"><h3>${sport}</h3><div class="list">${arr.map(c=>{let ok=state.streak>=c[5];let lv=levels.find(l=>c[5]>=l.min&&c[5]<=l.max);return `<div class="item ${ok?"":"locked"}"><div class="row"><b>${ok?"":"🔒 "}${c[2]}</b><span>${c[6]}p</span></div><div class="small muted">${ok?c[3]:`Ontgrendelt bij ${c[5]} dagen · ${lv.name}`}</div></div>`}).join("")}</div></section>`).join("");
+ const done=[...state.history].reverse();
+ document.getElementById("challenges").innerHTML=`
+ <section class="card"><h2>🏆 Voltooide challenges</h2><p class="muted">Alleen challenges die je al hebt gedaan. Je volgende challenge blijft een verrassing.</p></section>
+ ${done.length?`<section class="list">${done.map(h=>`<div class="item"><div class="row"><b>✓ ${h.title}</b><span>+${h.points}p</span></div><div class="small muted">${h.category} · ${h.date}</div></div>`).join("")}</section>`:
+ `<section class="card"><p class="muted">Je eerste challenge verschijnt hier zodra je hem voltooit.</p></section>`}`;
 }
 function renderProgress(){
- const now=new Date(), y=now.getFullYear(),m=now.getMonth(),days=new Date(y,m+1,0).getDate();
- let cal=""; for(let d=1;d<=days;d++){let dt=localDate(new Date(y,m,d));cal+=`<div class="day ${state.completedDates.includes(dt)?"done":""} ${d===now.getDate()?"today":""}">${d}</div>`}
- document.getElementById("progress").innerHTML=`<section class="card"><h2>📈 Jouw progress</h2><div class="grid"><div class="stat"><b>${state.streak}</b><span>huidige streak</span></div><div class="stat"><b>${state.longest}</b><span>langste streak</span></div><div class="stat"><b>${state.total}</b><span>challenges</span></div><div class="stat"><b>${state.points}</b><span>punten</span></div></div></section>
+ const now=new Date(),y=now.getFullYear(),m=now.getMonth(),days=new Date(y,m+1,0).getDate();
+ let cal="";
+ for(let d=1;d<=days;d++){let dt=localDate(new Date(y,m,d));cal+=`<div class="day ${state.completedDates.includes(dt)?"done":""} ${d===now.getDate()?"today":""}">${d}</div>`}
+ document.getElementById("progress").innerHTML=`
+ <section class="card"><h2>📈 Jouw progress</h2><div class="grid">
+ <div class="stat"><b>${state.streak}</b><span>huidige streak</span></div><div class="stat"><b>${state.longest}</b><span>langste streak</span></div>
+ <div class="stat"><b>${state.total}</b><span>challenges</span></div><div class="stat"><b>${state.points}</b><span>punten</span></div></div></section>
  <section class="card"><h3>Deze maand</h3><div class="calendar">${cal}</div></section>
- <section class="card"><h3>Recente challenges</h3>${state.history.slice(-8).reverse().map(h=>`<div class="item" style="margin:7px 0"><div class="row"><b>${h.title}</b><span>+${h.points}</span></div><div class="small muted">${h.date}</div></div>`).join("")||"<p class='muted'>Nog geen challenges voltooid.</p>"}</section>`;
+ <section class="card"><h3>Recent</h3>${state.history.slice(-8).reverse().map(h=>`<div class="item" style="margin:7px 0"><div class="row"><b>${h.title}</b><span>+${h.points}</span></div><div class="small muted">${h.category} · ${h.date}</div></div>`).join("")||"<p class='muted'>Nog niets voltooid.</p>"}</section>`;
 }
 function renderLevels(){
- document.getElementById("levels").innerHTML=`<section class="card"><h2>🔓 Levels</h2><p class="muted">Hoe langer je streak, hoe meer sportieve challenges je vrijspeelt.</p></section>`+
- levels.map(l=>`<section class="card"><div class="level"><div class="levelIcon">${l.icon}</div><div><h3 style="margin:0">${l.name}</h3><div class="small muted">${l.min===0?"Start":l.min+" dagen streak"}${l.max<99999?" – "+l.max+" dagen": " +"}</div></div></div><p class="small" style="margin:12px 0 0">${challenges.filter(c=>c[5]>=l.min&&c[5]<=l.max).slice(0,3).map(c=>c[2]).join(" · ")||"Nieuwe challenges worden hier beschikbaar."}</p></section>`).join("");
-}
-function renderProfile(){
- document.getElementById("profile").innerHTML=`<section class="card"><h2>👤 Profiel</h2><p><b>${challenges.length.toLocaleString("nl-NL")}</b> thuis-challenges beschikbaar.</p><p class="muted">Kies de sporten die je graag terugziet. Je kunt altijd alles selecteren.</p><div id="sports">${sports.map(s=>`<button class="sport ${state.prefs.includes(s)?"selected":""}" onclick="toggleSport('${s.replaceAll("'","\\'")}')">${s}</button>`).join("")}</div><button class="secondary" style="margin-top:14px" onclick="selectAll()">Alle sporten</button></section>
- <section class="card"><h3>Statistieken</h3><p>🏆 ${state.total} challenges voltooid</p><p>🔥 ${state.longest} dagen langste streak</p><p>⭐ ${state.points} punten</p></section>
- <section class="card"><h3>Reset</h3><p class="small muted">Hiermee verwijder je alle lokale voortgang op dit apparaat.</p><button class="danger" onclick="resetAll()">Reset voortgang</button></section>`;
+ document.getElementById("levels").innerHTML=`<section class="card"><h2>🔓 Levels</h2><p class="muted">Je ziet hier je voortgang. Welke challenge er morgen komt, blijft geheim.</p></section>`+
+ levels.map(l=>`<section class="card"><div class="row"><div><h3>${l.icon} ${l.name}</h3><div class="small muted">${l.min===0?"Start":l.min+" dagen streak"}${l.max<99999?" – "+l.max:" +"}</div></div>${state.streak>=l.min?"✓":"🔒"}</div></section>`).join("");
 }
 function toggleSport(s){if(state.prefs.includes(s))state.prefs=state.prefs.filter(x=>x!==s);else state.prefs.push(s);save();render()}
 function selectAll(){state.prefs=[...sports];save();render()}
-function resetAll(){if(confirm("Alle voortgang wissen?")){localStorage.removeItem(key);state={streak:0,longest:0,total:0,points:0,completedDates:[],history:[],prefs:[...sports],lastChallenge:null};render()}}
+function resetAll(){if(confirm("Alle voortgang wissen?")){localStorage.removeItem(key);location.reload()}}
+function renderProfile(){
+ document.getElementById("profile").innerHTML=`
+ <section class="card"><h2>👤 Profiel</h2><p class="muted">${challenges.length.toLocaleString("nl-NL")} mogelijke thuis-challenges in de bibliotheek.</p>
+ <h3>Favoriete categorieën</h3>${sports.map(s=>`<button class="sport ${state.prefs.includes(s)?"selected":""}" onclick="toggleSport('${s}')">${s}</button>`).join("")}
+ <br><button class="secondary" style="margin-top:10px" onclick="selectAll()">Alle categorieën</button></section>
+ <section class="card"><h3>Statistieken</h3><p>🏆 ${state.total} voltooid</p><p>🔥 ${state.longest} dagen langste streak</p><p>⭐ ${state.points} punten</p></section>
+ <section class="card"><h3>Reset</h3><button class="danger" onclick="resetAll()">Reset voortgang</button></section>`;
+}
 function render(){renderToday();renderChallenges();renderProgress();renderLevels();renderProfile()}
-nav();render();
+document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");
+ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.getElementById(b.dataset.page).classList.add("active");render();
+});
+render();
 </script>
 </body>
 </html>
