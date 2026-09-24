@@ -43,6 +43,46 @@ button{border:0;border-radius:14px;padding:13px 15px;font-weight:800;font-size:1
 <script>
 const sports=["🫀 Conditie","💪 Kracht","🔥 HIIT","🥊 Boksen","🤸 Mobiliteit","🎯 Coördinatie","🏠 Full body","🧠 Skills"];
 
+const dailyMotivations=[
+"Sterk bezig! Morgen staat er weer een nieuwe challenge voor je klaar.",
+"Lekker gedaan! Elke dag een kleine stap maakt je sterker.",
+"Topper! Je streak groeit — blijf morgen weer in beweging.",
+"Goed gewerkt! Vandaag afgevinkt, morgen weer een nieuwe uitdaging.",
+"Je hebt het weer gedaan! Houd dit ritme vast.",
+"Knap bezig! Consistentie maakt het verschil.",
+"Weer een dag voltooid! Je bent lekker op weg.",
+"Yes! Challenge geslaagd. Morgen wacht de volgende.",
+"Sterke actie! Blijf bouwen aan je streak.",
+"Goed bezig! Eén challenge per dag, stap voor stap.",
+"Jij hebt vandaag je doel gehaald. Morgen gaan we verder!",
+"Mooi werk! Je maakt van bewegen een gewoonte.",
+"Challenge voltooid! Geef jezelf een momentje om trots te zijn.",
+"Lekker! Je streak staat weer een dag sterker.",
+"Goed gedaan! Blijf bewegen, blijf groeien.",
+"Vandaag gepakt, morgen weer een nieuwe kans. Tot morgen!",
+"Sterk afgerond! Je dagelijkse inzet telt.",
+"Yes, weer een vinkje! Houd de reeks gaande.",
+"Je bent vandaag in beweging gekomen — precies zoals het hoort.",
+"Mooie dag, mooie challenge. Morgen weer!",
+"Goed bezig! Je hoeft niet perfect te zijn, alleen consistent.",
+"Weer een challenge van de lijst! Op naar morgen.",
+"Krachtig gedaan! Je streak blijft leven.",
+"Top! Vandaag verdiend, morgen ontdekken we wat er wacht.",
+"Je hebt hem geflikt! Blijf lekker doorgaan.",
+"Elke voltooide challenge telt. Vandaag weer eentje erbij!",
+"Mooi volgehouden! Morgen staat er iets nieuws klaar.",
+"Goed gedaan! Je toekomstige zelf gaat je bedanken.",
+"Sterke finish voor vandaag. Morgen weer een frisse challenge!",
+"Challenge klaar! Blijf trots op elke dag die je pakt."
+];
+
+function motivationForDate(date){
+ const d=new Date(date+"T12:00:00");
+ const start=new Date(d.getFullYear(),0,0);
+ const day=Math.floor((d-start)/86400000);
+ return dailyMotivations[(day-1)%dailyMotivations.length];
+}
+
 const levels=[
 {min:0,max:6,name:"Rookie",icon:"🌱"},
 {min:7,max:20,name:"Starter",icon:"🚀"},
@@ -224,12 +264,22 @@ function streakProgress(){
 }
 function renderToday(){
  const c=daily(),l=level(),n=nextLevel(),done=state.completedDates.includes(localDate()),pr=streakProgress();
- document.getElementById("today").innerHTML=`
- <section class="card hero"><div class="eyebrow">${dateNL()}</div><h1>${l.icon} ${l.name}</h1><p class="muted">Streak: <b>${state.streak} dagen</b> · ${state.points} punten</p></section>
+ const challengeCard=done?`
+ <section class="card" style="text-align:center;padding:28px 18px">
+   <div style="font-size:46px">🎉</div>
+   <h2>Goed gedaan!</h2>
+   <p>Je hebt de challenge van vandaag voltooid.</p>
+   <p class="muted"><b>${motivationForDate(localDate())}</b></p>
+   <div class="pill">🔥 ${state.streak} dagen streak</div>
+   <div class="pill">⭐ ${state.points} punten</div>
+ </section>`:`
  <section class="card"><span class="pill">${c[1]}</span><span class="pill">${c[4]} min</span><span class="pill">${c[6]} punten</span>
  <div class="challenge-title">${c[2]}</div><p class="muted">${c[3]}</p>
  <p><b>Thuis</b> · Geen speciale apparatuur nodig</p>
- <button class="primary" ${done?"disabled":""} onclick="complete()">${done?"✓ Challenge voltooid":"Ik heb hem gedaan ✓"}</button></section>
+ <button class="primary" onclick="complete()">Ik heb hem gedaan ✓</button></section>`;
+ document.getElementById("today").innerHTML=`
+ <section class="card hero"><div class="eyebrow">${dateNL()}</div><h1>${l.icon} ${l.name}</h1><p class="muted">Streak: <b>${state.streak} dagen</b> · ${state.points} punten</p></section>
+ ${challengeCard}
  <section class="card"><div class="row"><b>Naar ${n?n.name:"Legend"}</b><span>${pr.text}</span></div><div class="progress" style="margin-top:10px"><i style="width:${pr.pct}%"></i></div></section>
  <section class="grid"><div class="stat"><b>${state.total}</b><span>voltooid</span></div><div class="stat"><b>${state.longest}</b><span>langste streak</span></div></section>
  <div class="notice">Kies een passend tempo, warm rustig op en pas een oefening aan als dat nodig is. Stop bij pijn of duizeligheid.</div>`;
@@ -237,9 +287,10 @@ function renderToday(){
 function renderChallenges(){
  const done=[...state.history].reverse();
  document.getElementById("challenges").innerHTML=`
- <section class="card"><h2>🏆 Voltooide challenges</h2><p class="muted">Alleen challenges die je al hebt gedaan. Je volgende challenge blijft een verrassing.</p></section>
+ <section class="card"><h2>🏆 Voltooide challenges</h2>
+ <p class="muted">Hier staan alleen de challenges die jij hebt voltooid. Nieuwe challenges blijven verborgen.</p></section>
  ${done.length?`<section class="list">${done.map(h=>`<div class="item"><div class="row"><b>✓ ${h.title}</b><span>+${h.points}p</span></div><div class="small muted">${h.category} · ${h.date}</div></div>`).join("")}</section>`:
- `<section class="card"><p class="muted">Je eerste challenge verschijnt hier zodra je hem voltooit.</p></section>`}`;
+ `<section class="card"><p class="muted">Nog geen voltooide challenges. Je eerste verschijnt hier na je eerste challenge.</p></section>`}`;
 }
 function renderProgress(){
  const now=new Date(),y=now.getFullYear(),m=now.getMonth(),days=new Date(y,m+1,0).getDate();
@@ -259,9 +310,14 @@ function renderLevels(){
 function toggleSport(s){if(state.prefs.includes(s))state.prefs=state.prefs.filter(x=>x!==s);else state.prefs.push(s);save();render()}
 function selectAll(){state.prefs=[...sports];save();render()}
 function resetAll(){if(confirm("Alle voortgang wissen?")){localStorage.removeItem(key);location.reload()}}
+function selectedChallengeCount(){
+ const selected=state.prefs;
+ if(!selected.length) return 0;
+ return challenges.filter(c=>selected.includes(c[1])).length;
+}
 function renderProfile(){
  document.getElementById("profile").innerHTML=`
- <section class="card"><h2>👤 Profiel</h2><p class="muted">${challenges.length.toLocaleString("nl-NL")} mogelijke thuis-challenges in de bibliotheek.</p>
+ <section class="card"><h2>👤 Profiel</h2><p class="muted"><b>${selectedChallengeCount().toLocaleString("nl-NL")}</b> challenges passen bij je geselecteerde categorieën.</p>
  <h3>Favoriete categorieën</h3>${sports.map(s=>`<button class="sport ${state.prefs.includes(s)?"selected":""}" onclick="toggleSport('${s}')">${s}</button>`).join("")}
  <br><button class="secondary" style="margin-top:10px" onclick="selectAll()">Alle categorieën</button></section>
  <section class="card"><h3>Statistieken</h3><p>🏆 ${state.total} voltooid</p><p>🔥 ${state.longest} dagen langste streak</p><p>⭐ ${state.points} punten</p></section>
