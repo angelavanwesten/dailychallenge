@@ -1,129 +1,202 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="nl">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#111318">
-<title>Challenge van de Dag</title>
+<meta name="theme-color" content="#101827">
+<title>Daily Challenge</title>
 <style>
-*{box-sizing:border-box}body{margin:0;background:#f4f5f7;color:#111318;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
-header{background:#111318;color:#fff;padding:20px 18px 16px;position:sticky;top:0;z-index:10}.brand{font-size:24px;font-weight:900;letter-spacing:-.8px}.sub{font-size:12px;color:#aeb4be;margin-top:2px}
-nav{display:flex;gap:7px;overflow:auto;margin-top:15px}nav button{border:0;background:#252a32;color:#dfe3e8;padding:9px 12px;border-radius:11px;font-weight:750;white-space:nowrap}nav button.active{background:#fff;color:#111}
-main{max-width:760px;margin:auto;padding:18px 14px 45px}.page{display:none}.page.active{display:block}
-.hero{background:#111318;color:#fff;border-radius:24px;padding:25px 21px;margin-bottom:14px}.date{color:#aeb4be;font-size:13px;font-weight:700}.hero h1{font-size:35px;line-height:1.02;margin:7px 0 10px;letter-spacing:-1.3px}.hero p{color:#c8cdd5;line-height:1.5;margin:0}
-.challenge{background:#fff;border:1px solid #e1e4e8;border-radius:22px;padding:22px;margin-bottom:14px}.category{display:inline-block;background:#eef0f3;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:850}.challenge h2{font-size:28px;margin:14px 0 8px}.challenge .desc{color:#59616d;line-height:1.5}.bigbtn{width:100%;border:0;background:#111318;color:#fff;padding:16px;border-radius:14px;font-size:16px;font-weight:850;margin-top:17px}.bigbtn.done{background:#dfeee3;color:#193a24}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.stat{background:#fff;border:1px solid #e1e4e8;border-radius:16px;padding:14px}.stat b{font-size:25px;display:block}.stat small{color:#69717d}
-.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}.card{background:#fff;border:1px solid #e1e4e8;border-radius:17px;padding:16px}.card h3{margin:5px 0 6px}.muted{color:#69717d;line-height:1.45;font-size:14px}
-.list{display:grid;gap:9px}.row{background:#fff;border:1px solid #e1e4e8;border-radius:15px;padding:14px;display:flex;justify-content:space-between;align-items:center;gap:12px}.tag{font-size:11px;font-weight:800;color:#69717d}
-.filter{display:flex;gap:7px;overflow:auto;margin:10px 0 13px}.filter button{border:1px solid #d9dde2;background:#fff;border-radius:999px;padding:9px 12px;font-weight:750;white-space:nowrap}.filter button.active{background:#111318;color:#fff}
-.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.day{aspect-ratio:1;background:#fff;border:1px solid #e1e4e8;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:750;font-size:13px}.day.done{background:#111318;color:#fff}.day.today{outline:2px solid #111318}
-.badge{font-size:40px}.settings button{width:100%;padding:13px;border:1px solid #d8dce1;background:#fff;border-radius:12px;text-align:left;font-weight:750;margin-top:8px}
-footer{text-align:center;color:#8a919b;font-size:12px;padding:15px}
-@media(max-width:480px){.hero h1{font-size:31px}.stats{grid-template-columns:repeat(3,1fr)}.stat{padding:11px 9px}.stat b{font-size:22px}}
+:root{--bg:#f4f6f8;--card:#fff;--text:#101827;--muted:#667085;--line:#e5e7eb;--accent:#16a34a;--accent2:#0f766e;--dark:#101827;--danger:#dc2626}
+*{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text)}
+.app{max-width:620px;margin:auto;min-height:100vh;padding-bottom:88px}.top{padding:24px 18px 8px}.brand{font-weight:900;font-size:27px}.sub{color:var(--muted);margin-top:3px}
+.page{display:none;padding:12px 16px}.page.active{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:18px;margin:10px 0;box-shadow:0 4px 18px #1018270a}
+.hero{background:linear-gradient(135deg,#101827,#193c32);color:#fff;border:0;padding:22px}
+.eyebrow{text-transform:uppercase;letter-spacing:.08em;font-size:12px;font-weight:800;opacity:.72}
+h1,h2,h3,p{margin-top:0}h1{font-size:29px;line-height:1.05;margin:8px 0}h2{font-size:21px;margin-bottom:8px}h3{margin-bottom:5px}
+.muted{color:var(--muted)}.hero .muted{color:#cbd5d1}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.stat{padding:14px;border-radius:16px;background:#f8fafc}.stat b{display:block;font-size:24px}.stat span{font-size:12px;color:var(--muted)}
+button{border:0;border-radius:14px;padding:13px 15px;font-weight:800;font-size:14px;cursor:pointer}
+.primary{background:var(--accent);color:#fff;width:100%;margin-top:12px}.secondary{background:#eef2f0;color:var(--text)}.danger{background:#fee2e2;color:#991b1b}
+.pill{display:inline-flex;padding:6px 10px;border-radius:999px;background:#e9f7ef;color:#166534;font-weight:800;font-size:12px;margin:2px 3px 2px 0}
+.challenge-title{font-size:26px;font-weight:900;margin:7px 0}.big{font-size:48px;font-weight:950;line-height:1}
+.progress{height:9px;background:#e5e7eb;border-radius:99px;overflow:hidden}.progress>i{display:block;height:100%;background:var(--accent);border-radius:99px}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.list{display:grid;gap:9px}.item{padding:14px;border:1px solid var(--line);border-radius:17px;background:#fff}.item.locked{opacity:.52}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(620px,100%);background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr);padding:7px 7px calc(7px + env(safe-area-inset-bottom));z-index:5}.nav button{background:transparent;color:#667085;padding:8px 3px;font-size:11px}.nav button.active{color:#0f766e}.nav span{display:block;font-size:19px;margin-bottom:2px}
+.check{font-size:13px;color:#166534;font-weight:800}.section{margin-top:18px}.sport{display:inline-block;margin:4px 4px 0 0;padding:8px 11px;border:1px solid var(--line);border-radius:999px;background:#fff}.sport.selected{background:#dcfce7;border-color:#86efac;color:#166534}
+.small{font-size:12px}.level{display:flex;gap:12px;align-items:center}.levelIcon{width:46px;height:46px;border-radius:15px;background:#eef2f0;display:grid;place-items:center;font-size:23px}
+.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}.day{height:34px;border-radius:9px;background:#f1f5f9;display:grid;place-items:center;font-size:11px}.day.done{background:#bbf7d0;color:#166534;font-weight:900}.day.today{outline:2px solid #16a34a}
+.modal{position:fixed;inset:0;background:#0008;display:none;align-items:flex-end;justify-content:center;z-index:20}.modal.show{display:flex}.sheet{width:min(620px,100%);background:#fff;border-radius:24px 24px 0 0;padding:20px;max-height:88vh;overflow:auto}
+label{font-weight:800;font-size:13px;display:block;margin:12px 0 6px}input{width:100%;padding:13px;border:1px solid var(--line);border-radius:12px;font:inherit}
+.notice{padding:12px;border-radius:14px;background:#fff7ed;color:#9a3412;font-size:12px}
 </style>
 </head>
 <body>
-<header>
- <div class="brand">CHALLENGE VAN DE DAG</div>
- <div class="sub">Elke dag één kleine uitdaging.</div>
- <nav id="nav"></nav>
-</header>
+<div class="app">
+  <header class="top"><div class="brand">⚡ Daily Challenge</div><div class="sub">Elke dag één sportieve challenge.</div></header>
 
-<main>
-<section id="home" class="page active">
- <div class="hero">
-  <div class="date" id="date"></div>
-  <h1>Wat is jouw challenge?</h1>
-  <p>Doe vandaag één ding voor jezelf. Klein genoeg om te doen. Leuk genoeg om vol te houden.</p>
- </div>
- <div class="challenge">
-  <span class="category" id="todayCat"></span>
-  <h2 id="todayTitle"></h2>
-  <div class="desc" id="todayDesc"></div>
-  <button class="bigbtn" id="doneBtn" onclick="completeToday()"></button>
- </div>
- <div class="stats">
-  <div class="stat"><b id="streak">0</b><small>🔥 streak</small></div>
-  <div class="stat"><b id="total">0</b><small>✓ voltooid</small></div>
-  <div class="stat"><b id="points">0</b><small>⭐ punten</small></div>
- </div>
-</section>
+  <main id="today" class="page active"></main>
+  <main id="challenges" class="page"></main>
+  <main id="progress" class="page"></main>
+  <main id="levels" class="page"></main>
+  <main id="profile" class="page"></main>
 
-<section id="challenges" class="page">
- <div class="hero"><h1>Alle challenges</h1><p>Kies een categorie en ontdek wat er op je te wachten staat.</p></div>
- <div class="filter" id="filters"></div>
- <div class="list" id="challengeList"></div>
-</section>
+  <nav class="nav">
+    <button data-page="today" class="active"><span>🏠</span>Vandaag</button>
+    <button data-page="challenges"><span>🏆</span>Challenges</button>
+    <button data-page="progress"><span>📈</span>Progress</button>
+    <button data-page="levels"><span>🔓</span>Levels</button>
+    <button data-page="profile"><span>👤</span>Profiel</button>
+  </nav>
+</div>
 
-<section id="progress" class="page">
- <div class="hero"><h1>Jouw voortgang</h1><p>Elke dag telt. Bekijk je streak, punten en voltooide challenges.</p></div>
- <div class="grid">
-  <div class="card"><div class="badge">🔥</div><h3 id="pStreak">0 dagen</h3><p class="muted">Huidige streak</p></div>
-  <div class="card"><div class="badge">⭐</div><h3 id="pPoints">0 punten</h3><p class="muted">Totaal verdiend</p></div>
-  <div class="card"><div class="badge">🏆</div><h3 id="pTotal">0 challenges</h3><p class="muted">Voltooid</p></div>
- </div>
- <div class="card" style="margin-top:12px"><h3>Deze maand</h3><div class="calendar" id="calendar"></div></div>
-</section>
-
-<section id="badges" class="page">
- <div class="hero"><h1>Badges</h1><p>Verdien badges door challenges vol te houden.</p></div>
- <div class="grid" id="badgesGrid"></div>
-</section>
-
-<section id="profile" class="page">
- <div class="hero"><h1>Profiel</h1><p>Jouw persoonlijke challenge-overzicht wordt lokaal op dit apparaat bewaard.</p></div>
- <div class="card"><h3>Jouw naam</h3><input id="nameInput" placeholder="Bijv. Alex" style="width:100%;padding:13px;border:1px solid #d7dbe0;border-radius:11px"><button class="bigbtn" onclick="saveName()">Opslaan</button><p class="muted" id="nameSaved"></p></div>
- <div class="card settings" style="margin-top:12px"><h3>Instellingen</h3><button onclick="resetProgress()">♻️ Voortgang opnieuw instellen</button></div>
-</section>
-</main>
-<footer>Challenge van de Dag · publieke demo · gegevens blijven op dit apparaat</footer>
+<div id="modal" class="modal"><div class="sheet" id="sheet"></div></div>
 
 <script>
-const challenges=[
- {t:"30 minuten wandelen",c:"Bewegen",d:"Ga vandaag 30 minuten naar buiten en wandel in je eigen tempo.",p:10},
- {t:"50 squats",c:"Kracht",d:"Doe 5 rondes van 10 squats. Neem rust wanneer je die nodig hebt.",p:10},
- {t:"10 minuten mobiliteit",c:"Mobiliteit",d:"Neem 10 minuten voor rustig rekken en bewegen van je hele lichaam.",p:10},
- {t:"5 kilometer fietsen",c:"Fietsen",d:"Stap op de fiets en leg vandaag 5 kilometer af.",p:15},
- {t:"20 push-ups",c:"Kracht",d:"Verdeel 20 push-ups over zoveel setjes als je prettig vindt.",p:10},
- {t:"1 minuut plank",c:"Kracht",d:"Bouw op naar één minuut plank. Stop als je vorm niet meer goed blijft.",p:10},
- {t:"8.000 stappen",c:"Bewegen",d:"Probeer vandaag in totaal 8.000 stappen te zetten.",p:15},
- {t:"15 minuten rustig fietsen",c:"Fietsen",d:"Een korte ontspannen fietstocht. Geen snelheid nodig.",p:10},
- {t:"5 minuten ademhaling",c:"Herstel",d:"Ga rustig zitten en besteed vijf minuten aan langzaam ademen.",p:10},
- {t:"Trap-challenge",c:"Bewegen",d:"Neem vandaag bewust de trap in plaats van de lift wanneer dat kan.",p:10},
- {t:"100 jumping jacks",c:"Fun",d:"Verdeel 100 jumping jacks over kleine setjes en maak er iets leuks van.",p:15},
- {t:"10 minuten zonder telefoon",c:"Herstel",d:"Leg je telefoon weg en doe tien minuten helemaal niets met een scherm.",p:10}
+const sports = ["🏃 Hardlopen","🚴 Fietsen","💪 Kracht","🏋️ Fitness","🏊 Zwemmen","⚽ Voetbal","🎾 Tennis","🏀 Basketbal","🥊 Boksen","🧘 Mobiliteit","🚶 Wandelen","🧗 Avontuur","🎯 Skills"];
+
+const levels = [
+ {min:0,max:6,name:"Rookie",icon:"🌱"},
+ {min:7,max:20,name:"Starter",icon:"🚀"},
+ {min:21,max:44,name:"Athlete",icon:"💪"},
+ {min:45,max:74,name:"Advanced",icon:"🔥"},
+ {min:75,max:119,name:"Pro",icon:"⚡"},
+ {min:120,max:179,name:"Elite",icon:"🏆"},
+ {min:180,max:99999,name:"Legend",icon:"👑"}
 ];
-const state=JSON.parse(localStorage.getItem("cvdd_state")||'{"done":[],"name":""}');
-const todayKey=()=>new Date().toISOString().slice(0,10);
-const dayIndex=()=>Math.floor(new Date(new Date().getFullYear(),new Date().getMonth(),new Date().getDate()).getTime()/86400000);
-let filter="Alles";
 
-const navItems=[["home","🏠 Vandaag"],["challenges","🏆 Challenges"],["progress","📈 Voortgang"],["badges","🎖️ Badges"],["profile","👤 Profiel"]];
-navItems.forEach((x,i)=>{let b=document.createElement("button");b.textContent=x[1];b.id="n-"+x[0];b.onclick=()=>go(x[0]);nav.appendChild(b)});
+const challenges = [
+["run1","🏃 Hardlopen","2 km rustig hardlopen","Loop 2 km op comfortabel tempo.",2,0,30],
+["run2","🏃 Hardlopen","Run/walk 20 minuten","Wissel 2 min rustig lopen af met 1 min wandelen.",2,0,25],
+["run3","🏃 Hardlopen","3 km steady","Loop 3 km gelijkmatig en gecontroleerd.",3,7,35],
+["run4","🏃 Hardlopen","6 × 30 sec versnellen","Na warming-up: 6 korte versnellingen met rustig herstel.",3,21,45],
+["run5","🏃 Hardlopen","5 km challenge","Loop 5 km op een tempo dat je kunt volhouden.",4,45,60],
+["run6","🏃 Hardlopen","Heuvelblok","10 min rustig + 6 korte heuvelop-versnellingen.",4,75,55],
+["bike1","🚴 Fietsen","10 km fietsen","Fiets 10 km ontspannen tot matig.",2,0,30],
+["bike2","🚴 Fietsen","15 min hoge cadans","Fiets 15 min met lichte weerstand en vlotte trapfrequentie.",2,7,25],
+["bike3","🚴 Fietsen","20 km rit","Maak een rit van 20 km op beheerst tempo.",3,21,50],
+["bike4","🚴 Fietsen","5 × 2 min tempo","Doe 5 blokken van 2 min stevig, met herstel ertussen.",4,45,45],
+["bike5","🚴 Fietsen","30 km avontuur","Kies een mooie route van circa 30 km.",5,75,90],
+["strength1","💪 Kracht","40 squats","4 × 10 lichaamsgewicht-squats, technisch netjes.",2,0,15],
+["strength2","💪 Kracht","30 push-ups","Verdeel 30 herhalingen over sets die goed blijven voelen.",2,0,15],
+["strength3","💪 Kracht","3-ronden circuit","10 squats + 8 push-ups + 20 sec plank, 3 rondes.",3,7,20],
+["strength4","💪 Kracht","60 lunges","30 per been, eventueel verdeeld over sets.",3,21,25],
+["strength5","💪 Kracht","100 reps circuit","Squat, push-up en lunge: samen 100 nette herhalingen.",4,45,30],
+["strength6","💪 Kracht","Core 12 minuten","Wissel plank, dead bug en side plank af.",4,75,20],
+["fit1","🏋️ Fitness","10 min interval","10 rondes: 30 sec bewegen, 30 sec rustig herstel.",2,0,15],
+["fit2","🏋️ Fitness","15 min full body","Maak een rustig circuit met squat, push-up, lunge en plank.",2,7,20],
+["fit3","🏋️ Fitness","20 min circuit","Werk 20 min door met korte pauzes en goede techniek.",3,21,25],
+["fit4","🏋️ Fitness","12 × 40/20","40 sec werk, 20 sec herstel, 12 rondes.",4,45,15],
+["swim1","🏊 Zwemmen","20 banen","Zwem 20 banen rustig tot matig, passend bij je bad.",2,0,30],
+["swim2","🏊 Zwemmen","30 minuten techniek","30 min zwemmen met aandacht voor techniek en rustige ademhaling.",3,7,35],
+["swim3","🏊 Zwemmen","1 km zwemmen","Zwem 1 km verdeeld in haalbare blokken.",4,45,40],
+["football1","⚽ Voetbal","100 balcontacten","Doe 100 gecontroleerde touches met beide voeten.",2,0,15],
+["football2","⚽ Voetbal","20 min dribbelen","Oefen dribbelen met richtingswissels gedurende 20 min.",2,7,25],
+["football3","⚽ Voetbal","50 passes per voet","50 korte passes links en 50 rechts tegen een muur of partner.",3,21,25],
+["football4","⚽ Voetbal","Finishing 30","Doe 30 gerichte schoten of afrondingen met controle.",4,45,30],
+["tennis1","🎾 Tennis","20 min rally","Werk 20 min aan rustige rally's en controle.",2,0,25],
+["tennis2","🎾 Tennis","50 serves","Doe 50 servicepogingen met focus op routine en plaatsing.",3,7,35],
+["tennis3","🎾 Tennis","Footwork 15 min","Oefen split step en korte richtingswissels.",3,21,20],
+["tennis4","🎾 Tennis","100 ballen","Werk aan forehand/backhand: 100 gecontroleerde ballen.",4,45,35],
+["basket1","🏀 Basketbal","50 vrije worpen","Neem 50 vrije worpen en noteer je score.",2,0,25],
+["basket2","🏀 Basketbal","15 min dribbling","Wissel handen, richtingen en tempo af.",2,7,20],
+["basket3","🏀 Basketbal","30 lay-ups","15 per kant, focus op voetenwerk.",3,21,25],
+["basket4","🏀 Basketbal","100 shots","Neem 100 schoten vanuit verschillende posities.",4,45,45],
+["boxing1","🥊 Boksen","4 × 2 min shadowboxing","4 rondes rustig technisch shadowboxen.",2,0,15],
+["boxing2","🥊 Boksen","Footwork 15 min","Oefen voorwaarts, achterwaarts en zijwaarts bewegen.",2,7,20],
+["boxing3","🥊 Boksen","6 × 2 min","6 technische rondes met rustig herstel.",3,21,25],
+["boxing4","🥊 Boksen","Combinaties 100","Werk 100 gecontroleerde stoten af in combinaties.",4,45,25],
+["mob1","🧘 Mobiliteit","10 min sportmobility","Focus op enkels, heupen, bovenrug en schouders.",2,0,12],
+["mob2","🧘 Mobiliteit","15 min herstel","15 min rustige mobiliteit na je sport.",2,7,18],
+["mob3","🧘 Mobiliteit","20 min bewegingsflow","Maak een volledige sportgerichte mobility flow.",3,21,25],
+["walk1","🚶 Wandelen","30 min stevig","Loop 30 min in stevig maar comfortabel tempo.",2,0,35],
+["walk2","🚶 Wandelen","45 min route","Maak een actieve wandeling van 45 min.",2,7,50],
+["walk3","🚶 Wandelen","60 min heuvels","Kies een route met wat hoogteverschil.",3,21,65],
+["ad1","🧗 Avontuur","100 traptreden","Verzamel 100 traptreden verdeeld over sets.",2,0,15],
+["ad2","🧗 Avontuur","20 min touwtje springen","Rustig opbouwen en pauzeren wanneer nodig.",3,21,25],
+["ad3","🧗 Avontuur","Agility 20 min","Zet een simpel parcours uit met richtingswissels.",4,45,25],
+["skill1","🎯 Skills","Balans 10 min","Werk 10 min aan éénbenige balans en sport-specifieke controle.",2,0,12],
+["skill2","🎯 Skills","Reactie 15 min","Train reacties met een bal, muur of partner.",3,21,18],
+["skill3","🎯 Skills","Coördinatie 20 min","Combineer voetenwerk, hand-oogcoördinatie en ritme.",4,45,25],
+["pb1","🎯 Skills","Persoonlijk record","Herhaal een eerdere challenge en probeer je eigen tijd/afstand te verbeteren.",5,75,45],
+["pb2","🎯 Skills","Eigen score +10%","Kies een meetbare sportprestatie en probeer 10% boven je eerdere score te komen.",5,120,50],
+["pb3","🎯 Skills","Legend test","Kies je favoriete sport en zet één duidelijke persoonlijke benchmark.",6,180,60]
+];
 
-function save(){localStorage.setItem("cvdd_state",JSON.stringify(state));render();}
-function go(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));document.getElementById(id).classList.add("active");document.querySelectorAll("nav button").forEach(x=>x.classList.remove("active"));document.getElementById("n-"+id).classList.add("active");window.scrollTo(0,0);render()}
-function today(){return challenges[dayIndex()%challenges.length]}
-function completeToday(){let k=todayKey();if(!state.done.includes(k)){state.done.push(k);save()}}
-function isDone(k){return state.done.includes(k)}
-function calcStreak(){let s=0,d=new Date();while(state.done.includes(d.toISOString().slice(0,10))){s++;d.setDate(d.getDate()-1)}return s}
-function totalPoints(){let n=0;state.done.forEach(k=>{let idx=Math.abs(k.split("-").join("")*1)%challenges.length;n+=challenges[idx]?.p||10});return n}
-function render(){
- let t=today(), done=isDone(todayKey());
- date.textContent=new Date().toLocaleDateString("nl-NL",{weekday:"long",day:"numeric",month:"long"});
- todayCat.textContent=t.c;todayTitle.textContent=t.t;todayDesc.textContent=t.d;doneBtn.textContent=done?"✓ Challenge voltooid":"Ik heb hem gedaan";doneBtn.className="bigbtn"+(done?" done":"");
- streak.textContent=calcStreak();total.textContent=state.done.length;points.textContent=totalPoints();
- pStreak.textContent=calcStreak()+" dagen";pPoints.textContent=totalPoints()+" punten";pTotal.textContent=state.done.length+" challenges";
- renderFilters();renderList();renderCalendar();renderBadges();
- nameInput.value=state.name||"";
+const key="dailyChallengeV2";
+let state=JSON.parse(localStorage.getItem(key)||"null")||{
+ streak:0,longest:0,total:0,points:0,completedDates:[],history:[],prefs:[...sports],lastChallenge:null
+};
+function save(){localStorage.setItem(key,JSON.stringify(state))}
+function localDate(d=new Date()){return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0")}
+function dateNL(){return new Intl.DateTimeFormat("nl-NL",{weekday:"long",day:"numeric",month:"long"}).format(new Date())}
+function level(){return levels.find(l=>state.streak>=l.min&&state.streak<=l.max)||levels.at(-1)}
+function nextLevel(){return levels.find(l=>l.min>state.streak)}
+function available(){let arr=challenges.filter(c=>c[5]<=state.streak && (state.prefs.length===0||state.prefs.includes(c[1]))); if(!arr.length)arr=challenges.filter(c=>c[5]<=state.streak); return arr}
+function daily(){
+ const today=localDate();
+ const same=state.history.find(x=>x.date===today);
+ if(same)return challenges.find(c=>c[0]===same.id)||available()[0];
+ const arr=available().filter(c=>c[0]!==state.lastChallenge);
+ return arr[Math.floor(Math.random()*arr.length)]||available()[0];
 }
-function renderFilters(){let cats=["Alles",...new Set(challenges.map(x=>x.c))];filters.innerHTML="";cats.forEach(c=>{let b=document.createElement("button");b.textContent=c;b.className=c===filter?"active":"";b.onclick=()=>{filter=c;render()};filters.appendChild(b)})}
-function renderList(){challengeList.innerHTML="";challenges.filter(x=>filter==="Alles"||x.c===filter).forEach(x=>{let d=document.createElement("div");d.className="row";d.innerHTML=`<div><b>${x.t}</b><div class="tag">${x.c} · ${x.p} punten</div><div class="muted">${x.d}</div></div><span>→</span>`;challengeList.appendChild(d)})}
-function renderCalendar(){calendar.innerHTML="";let now=new Date(),first=new Date(now.getFullYear(),now.getMonth(),1),days=new Date(now.getFullYear(),now.getMonth()+1,0).getDate();for(let i=0;i<first.getDay();i++){let e=document.createElement("div");calendar.appendChild(e)}for(let i=1;i<=days;i++){let k=`${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,"0")}-${String(i).padStart(2,"0")}`;let e=document.createElement("div");e.className="day"+(isDone(k)?" done":"")+(i===now.getDate()?" today":"");e.textContent=i;calendar.appendChild(e)}}
-function renderBadges(){let defs=[["🔥","Eerste stap",1,"Voltooi je eerste challenge"],["🔥🔥","3 dagen",3,"Houd 3 dagen je streak vast"],["🔥🔥🔥","7 dagen",7,"Houd 7 dagen je streak vast"],["🏆","10 voltooid",10,"Voltooi 10 challenges"],["⭐","50 punten",50,"Verdien 50 punten"]];badgesGrid.innerHTML="";defs.forEach(x=>{let val=x[0].includes("🔥")?calcStreak():x[0]==="🏆"?state.done.length:totalPoints(),ok=val>=x[2];let d=document.createElement("div");d.className="card";d.style.opacity=ok?"1":".45";d.innerHTML=`<div class="badge">${x[0]}</div><h3>${x[1]}</h3><p class="muted">${x[3]}</p><b>${ok?"Ontgrendeld ✓":"Nog te behalen"}</b>`;badgesGrid.appendChild(d)})}
-function saveName(){state.name=nameInput.value.trim();nameSaved.textContent=state.name?`Opgeslagen. Veel succes, ${state.name}!`:"";save()}
-function resetProgress(){if(confirm("Weet je zeker dat je alle voortgang wilt wissen?")){state.done=[];save()}}
-render();go("home");
+function streakProgress(){
+ const n=nextLevel(); if(!n)return {text:"Max level bereikt",pct:100};
+ const pct=Math.round(((state.streak-n.min+1)/(n.min-(level().min)+1))*100);
+ return {text:`${state.streak}/${n.min} dagen`,pct:Math.max(0,Math.min(100,pct))};
+}
+function complete(){
+ const c=daily(), today=localDate();
+ if(state.completedDates.includes(today)) return;
+ const yesterday=new Date(); yesterday.setDate(yesterday.getDate()-1);
+ const yd=localDate(yesterday);
+ state.streak=state.completedDates.includes(yd)?state.streak+1:1;
+ state.longest=Math.max(state.longest,state.streak);
+ state.total++; state.points+=c[6];
+ state.completedDates.push(today);
+ state.history.push({date:today,id:c[0],title:c[2],points:c[6]});
+ state.lastChallenge=c[0]; save(); render();
+}
+function nav(){
+ document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));document.getElementById(b.dataset.page).classList.add("active");render()})
+}
+function renderToday(){
+ const c=daily(), l=level(), n=nextLevel(), done=state.completedDates.includes(localDate()), pr=streakProgress();
+ document.getElementById("today").innerHTML=`
+ <section class="card hero"><div class="eyebrow">${dateNL()}</div><h1>${l.icon} ${l.name}</h1><p class="muted">Streak: <b>${state.streak} dagen</b> · ${state.points} punten</p></section>
+ <section class="card"><span class="pill">${c[1]}</span><span class="pill">${c[6]} punten</span><div class="challenge-title">${c[2]}</div><p class="muted">${c[3]}</p><p><b>Richttijd:</b> ${c[6]} min · <b>Level:</b> ${levels.find(x=>x.min===c[5]).name}</p>
+ <button class="primary" ${done?"disabled":""} onclick="complete()">${done?"✓ Challenge voltooid":"Ik heb hem gedaan ✓"}</button></section>
+ <section class="card"><div class="row"><b>Naar ${n?n.name:"Legend"}</b><span>${pr.text}</span></div><div class="progress" style="margin-top:10px"><i style="width:${pr.pct}%"></i></div></section>
+ <section class="grid"><div class="stat"><b>${state.total}</b><span>voltooid</span></div><div class="stat"><b>${state.longest}</b><span>langste streak</span></div></section>
+ <div class="notice">Sport slim: warm rustig op, pas de challenge aan je niveau aan en stop bij pijn, duizeligheid of andere klachten.</div>`;
+}
+function renderChallenges(){
+ const el=document.getElementById("challenges");
+ const groups={}; challenges.forEach(c=>(groups[c[1]]??=[]).push(c));
+ el.innerHTML=`<section class="card"><h2>🏆 Challenges</h2><p class="muted">Je level bepaalt welke challenges beschikbaar zijn. Zo groeit de moeilijkheid mee met je streak.</p></section>`+
+ Object.entries(groups).map(([sport,arr])=>`<section class="section"><h3>${sport}</h3><div class="list">${arr.map(c=>{let ok=state.streak>=c[5];let lv=levels.find(l=>c[5]>=l.min&&c[5]<=l.max);return `<div class="item ${ok?"":"locked"}"><div class="row"><b>${ok?"":"🔒 "}${c[2]}</b><span>${c[6]}p</span></div><div class="small muted">${ok?c[3]:`Ontgrendelt bij ${c[5]} dagen · ${lv.name}`}</div></div>`}).join("")}</div></section>`).join("");
+}
+function renderProgress(){
+ const now=new Date(), y=now.getFullYear(),m=now.getMonth(),days=new Date(y,m+1,0).getDate();
+ let cal=""; for(let d=1;d<=days;d++){let dt=localDate(new Date(y,m,d));cal+=`<div class="day ${state.completedDates.includes(dt)?"done":""} ${d===now.getDate()?"today":""}">${d}</div>`}
+ document.getElementById("progress").innerHTML=`<section class="card"><h2>📈 Jouw progress</h2><div class="grid"><div class="stat"><b>${state.streak}</b><span>huidige streak</span></div><div class="stat"><b>${state.longest}</b><span>langste streak</span></div><div class="stat"><b>${state.total}</b><span>challenges</span></div><div class="stat"><b>${state.points}</b><span>punten</span></div></div></section>
+ <section class="card"><h3>Deze maand</h3><div class="calendar">${cal}</div></section>
+ <section class="card"><h3>Recente challenges</h3>${state.history.slice(-8).reverse().map(h=>`<div class="item" style="margin:7px 0"><div class="row"><b>${h.title}</b><span>+${h.points}</span></div><div class="small muted">${h.date}</div></div>`).join("")||"<p class='muted'>Nog geen challenges voltooid.</p>"}</section>`;
+}
+function renderLevels(){
+ document.getElementById("levels").innerHTML=`<section class="card"><h2>🔓 Levels</h2><p class="muted">Hoe langer je streak, hoe meer sportieve challenges je vrijspeelt.</p></section>`+
+ levels.map(l=>`<section class="card"><div class="level"><div class="levelIcon">${l.icon}</div><div><h3 style="margin:0">${l.name}</h3><div class="small muted">${l.min===0?"Start":l.min+" dagen streak"}${l.max<99999?" – "+l.max+" dagen": " +"}</div></div></div><p class="small" style="margin:12px 0 0">${challenges.filter(c=>c[5]>=l.min&&c[5]<=l.max).slice(0,3).map(c=>c[2]).join(" · ")||"Nieuwe challenges worden hier beschikbaar."}</p></section>`).join("");
+}
+function renderProfile(){
+ document.getElementById("profile").innerHTML=`<section class="card"><h2>👤 Profiel</h2><p class="muted">Kies de sporten die je graag terugziet. Je kunt altijd alles selecteren.</p><div id="sports">${sports.map(s=>`<button class="sport ${state.prefs.includes(s)?"selected":""}" onclick="toggleSport('${s.replaceAll("'","\\'")}')">${s}</button>`).join("")}</div><button class="secondary" style="margin-top:14px" onclick="selectAll()">Alle sporten</button></section>
+ <section class="card"><h3>Statistieken</h3><p>🏆 ${state.total} challenges voltooid</p><p>🔥 ${state.longest} dagen langste streak</p><p>⭐ ${state.points} punten</p></section>
+ <section class="card"><h3>Reset</h3><p class="small muted">Hiermee verwijder je alle lokale voortgang op dit apparaat.</p><button class="danger" onclick="resetAll()">Reset voortgang</button></section>`;
+}
+function toggleSport(s){if(state.prefs.includes(s))state.prefs=state.prefs.filter(x=>x!==s);else state.prefs.push(s);save();render()}
+function selectAll(){state.prefs=[...sports];save();render()}
+function resetAll(){if(confirm("Alle voortgang wissen?")){localStorage.removeItem(key);state={streak:0,longest:0,total:0,points:0,completedDates:[],history:[],prefs:[...sports],lastChallenge:null};render()}}
+function render(){renderToday();renderChallenges();renderProgress();renderLevels();renderProfile()}
+nav();render();
 </script>
 </body>
 </html>
